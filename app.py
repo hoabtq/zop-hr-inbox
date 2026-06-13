@@ -87,10 +87,10 @@ COLUMN_MAP = {
     "Connector Channel": "conn_channel",
     "App User": "app_user",
     "Note": "note",
-    "SỐ DƯ": "so_du",
-    "NGÀY TẠO VÍ": "ngay_tao_vi",
-    "NGÀY LIÊN KẾT": "ngay_lien_ket",
-    "LIÊN KẾT LẦN ĐẦU": "lien_ket_lan_dau",
+    "so_du": "so_du",
+    "ngay_tao_vi": "ngay_tao_vi",
+    "ngay_lien_ket": "ngay_lien_ket",
+    "lien_ket_lan_dau": "lien_ket_lan_dau",
 }
 
 TRANSACTION_PLACEHOLDERS = {
@@ -188,7 +188,8 @@ def get_service_line2(group_df):
     return ""
 
 def get_wallet_note(row):
-    if parse_money(row.get("SỐ DƯ", "")) > 100000:
+    val = row.get("so_du", row.get("so_du", ""))
+    if parse_money(val) > 100000:
         return (
             "Trong ví vẫn có một phần số dư có thể hỗ trợ thu hồi. "
             "Nếu cần thu hồi anh/chị vui lòng cung cấp công văn thu hồi hoặc thư khiếu nại của KH "
@@ -197,7 +198,6 @@ def get_wallet_note(row):
             "Anh chị lưu ý cung cấp số tài khoản còn hoạt động để Zalopay có thể xử lý khi hoàn trả."
         )
     return ""
-
 def build_context(row):
     ctx = {}
     for excel_col, ph in COLUMN_MAP.items():

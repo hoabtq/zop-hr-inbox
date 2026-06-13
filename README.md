@@ -13,7 +13,7 @@ Tự động tạo chứng từ Word và reply Freshdesk ticket cho ZaloPay OP d
 ```bash
 pip install -r requirements.txt
 python app.py
-# Mở: http://localhost:5000
+# Mở: http://localhost:8080
 ```
 
 ## Cấu trúc file
