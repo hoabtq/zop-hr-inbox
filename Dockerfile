@@ -9,8 +9,8 @@ COPY . .
 
 RUN mkdir -p uploads output_grouped archive_data
 
-EXPOSE 5000
+EXPOSE 8080
 
-ENV PORT=5000
+ENV PORT=8080
 
-CMD ["python", "app.py"]
+CMD ["python", "-u", "app.py"]

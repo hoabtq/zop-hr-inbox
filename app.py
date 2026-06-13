@@ -745,7 +745,7 @@ def process():
 def send_freshdesk():
     import requests as req_lib
     results = []
-    base_url = "http://localhost:5000/mock-freshdesk"
+    base_url = "http://localhost:8080/mock-freshdesk"
 
     for item in state.get("freshdesk_data", []):
         tid   = str(item.get("ticket_id","")).strip()
@@ -819,7 +819,7 @@ def health():
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 8080))
     print(f"🚀 ZOP_HR_INBOX chạy tại http://localhost:{port}")
     print(f"🎫 Mock Freshdesk tickets: {len(MOCK_DB)}")
     app.run(host="0.0.0.0", port=port, debug=False)
