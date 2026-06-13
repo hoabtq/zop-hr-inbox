@@ -1,7 +1,7 @@
-# ZaloPay CS Automation Agent
+# ZaloPay Dispute Automation Agent
 
 ## Mô tả
-Tự động tạo chứng từ Word và reply Freshdesk ticket cho ZaloPay CS team.
+Tự động tạo chứng từ Word và reply Freshdesk ticket cho ZaloPay OP dispute team.
 
 ## Tính năng
 - Upload file Excel giao dịch → tạo hàng loạt file Word chứng từ
