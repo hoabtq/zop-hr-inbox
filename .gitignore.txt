@@ -1,0 +1,8 @@
+uploads/
+output_grouped/
+archive_data/
+output.zip
+freshdesk_reply_log.xlsx
+__pycache__/
+*.pyc
+.env
