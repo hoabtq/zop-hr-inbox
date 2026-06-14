@@ -10,31 +10,30 @@ Tự động tạo chứng từ Word/PDF và reply hàng loạt lên Freshdesk c
 - Upload file Excel giao dịch → tool tự đọc dữ liệu, điền vào template Word, nhóm theo ticket
 - Mỗi ticket được tạo thành 1 file `.docx` riêng, đặt tên theo mã ticket
 
-### 2. Xem chứng từ trực tiếp trên trình duyệt
-- Click vào tên chứng từ → mở tab mới xem ngay, không cần tải về
-- Nếu đã convert sang PDF thì hiển thị PDF (giữ định dạng gốc); nếu chưa thì render HTML từ docx
-
-### 3. Chỉnh sửa và thay thế chứng từ
+### 2. Chỉnh sửa và thay thế chứng từ
 - Tải file `.docx` về, chỉnh sửa bằng Word, rồi upload lại để thay thế bản cũ
 - Có thể thay thế 1 file hoặc nhiều file; các file không upload lại vẫn dùng bản tool đã tạo
 
-### 4. Convert sang PDF trước khi gửi
+### 3. Convert sang PDF trước khi gửi
 - Bước 3 có nút **Convert sang PDF** — chuyển toàn bộ `.docx` sang `.pdf` để giữ đúng font/layout
 - Chạy tự động bằng **LibreOffice** (Linux/Greennode) hoặc **Microsoft Word** (Windows)
 - Nếu convert thất bại, tool tự fallback sang gửi file `.docx` và hiện cảnh báo
 
-### 5. Chọn ticket muốn gửi
+### 4. Chọn ticket muốn gửi
 - Tick chọn từng ticket hoặc dùng **Chọn tất cả / Bỏ chọn tất cả**
 - Chỉ những ticket được tick mới được gửi reply
 
-### 6. Reply Freshdesk hàng loạt
+### 5. Reply Freshdesk hàng loạt
 - Gửi reply kèm đính kèm chứng từ (PDF hoặc docx) lên Freshdesk một lần cho tất cả ticket đã chọn
 - Có CC tự động theo cấu hình từng ticket
 
-### 7. Log kết quả
+### 6. Log kết quả
 - Sau khi gửi, xem log ngay trên web: ticket nào thành công, thất bại, lỗi gì
 - Tải log về file Excel (`.xlsx`) để lưu trữ
 
+### 7. Xem chứng từ trực tiếp trên trình duyệt
+- Click vào tên chứng từ → mở tab mới xem ngay, không cần tải về
+- Nếu đã convert sang PDF thì hiển thị PDF (giữ định dạng gốc); nếu chưa thì render HTML từ docx
 ---
 
 ## Luồng sử dụng (4 bước)
