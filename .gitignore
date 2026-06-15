@@ -3,6 +3,9 @@ output_grouped/
 archive_data/
 output.zip
 freshdesk_reply_log.xlsx
+banner.png
+zalopay_logo.png.png
 __pycache__/
 *.pyc
+*.pyo
 .env
