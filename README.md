@@ -15,7 +15,7 @@ Tự động tạo chứng từ Word/PDF và reply hàng loạt lên Freshdesk c
 - Có thể thay thế 1 file hoặc nhiều file; các file không upload lại vẫn dùng bản tool đã tạo
 
 ### 3. Convert sang PDF trước khi gửi
-- Bước 3 có nút **Convert sang PDF** — chuyển toàn bộ `.docx` sang `.pdf` để giữ đúng font/layout
+- Bước 2 có nút **Convert sang PDF** — chuyển toàn bộ `.docx` sang `.pdf` để giữ đúng font/layout
 - Chạy tự động bằng **LibreOffice** (Linux/Greennode) hoặc **Microsoft Word** (Windows)
 - Nếu convert thất bại, tool tự fallback sang gửi file `.docx` và hiện cảnh báo
 
@@ -34,13 +34,16 @@ Tự động tạo chứng từ Word/PDF và reply hàng loạt lên Freshdesk c
 ### 7. Xem chứng từ trực tiếp trên trình duyệt
 - Click vào tên chứng từ → mở tab mới xem ngay, không cần tải về
 - Nếu đã convert sang PDF thì hiển thị PDF (giữ định dạng gốc); nếu chưa thì render HTML từ docx
+
 ---
 
 ## Luồng sử dụng (4 bước)
 
 ```
-Bước 1: Upload Excel       →  Bước 2: Xem & thay chứng từ  →  Bước 3: Convert PDF  →  Bước 4: Gửi & Log
-Upload file giao dịch          Xem / tải / replace file           (tuỳ chọn)               Chọn ticket → Gửi
+Bước 1            →  Bước 2                      →  Bước 3        →  Bước 4
+Upload Excel          Kết quả Word                   Chọn & Gửi       Hoàn thành
+Upload file           Xem / tải / replace file        Chọn ticket      Xem log
+giao dịch             + Convert sang PDF (tuỳ chọn)   → Gửi reply      Tải log Excel
 ```
 
 ---
@@ -52,9 +55,10 @@ app.py                          # Flask app chính
 requirements.txt                # Thư viện Python
 Dockerfile                      # Deploy lên Greennode (có LibreOffice)
 
-TEMPLATE_RUN_MEGER.xlsx         # ← File dữ liệu giao dịch (upload ở Bước 1)
+TEMPLATE RUN MEGER.xlsx         # ← File dữ liệu giao dịch (upload ở Bước 1)
 freshdesk_reply_list_auto.xlsx  # Mapping ticket_id ↔ tên file chứng từ
-freshdesk_reply_log.xlsx        # Log kết quả gửi (tự sinh)
+freshdesk_ticket_list.xlsx      # Danh sách ticket ID cho Mock Freshdesk DB
+freshdesk_reply_log.xlsx        # Log kết quả gửi (tự sinh sau khi gửi)
 
 template_chung_tu_clean.docx    # Template Word cho chứng từ
 
@@ -67,7 +71,7 @@ archive_data/                   # Lưu trữ dữ liệu cũ
 
 ## Chuẩn bị file trước khi dùng
 
-### `TEMPLATE_RUN_MEGER.xlsx` — dữ liệu giao dịch
+### `TEMPLATE RUN MEGER.xlsx` — dữ liệu giao dịch
 File Excel chứa các cột dữ liệu giao dịch cần điền vào chứng từ. Đây là file bạn upload ở **Bước 1**.
 
 ### `freshdesk_reply_list_auto.xlsx` — danh sách ticket
@@ -75,6 +79,11 @@ File Excel chứa các cột dữ liệu giao dịch cần điền vào chứng 
 |-----|-------|
 | `ticket_id` | ID ticket trên Freshdesk |
 | `file_name` | Tên file chứng từ tương ứng (không cần đuôi `.docx`) |
+
+### `freshdesk_ticket_list.xlsx` — danh sách ticket ID (Mock DB)
+| Cột | Mô tả |
+|-----|-------|
+| `ticket_id` | ID ticket dùng để khởi tạo Mock Freshdesk DB khi chạy app |
 
 ### `template_chung_tu_clean.docx` — template Word
 File Word chứa các placeholder `{{tên_cột}}` tương ứng với tên cột trong Excel. Tool sẽ tự điền dữ liệu vào.
@@ -94,7 +103,7 @@ python app.py
 http://localhost:8080
 ```
 
-> **Lưu ý:** Trên Windows, bước Convert PDF dùng Microsoft Word (cần cài Word). Trên Linux dùng LibreOffice.
+> **Lưu ý:** Trên Windows, Convert PDF dùng Microsoft Word (cần cài sẵn Word). Trên Linux/Greennode dùng LibreOffice.
 
 ---
 
@@ -123,7 +132,7 @@ http://localhost:8080
 4. Sau khi deploy, truy cập qua URL Greennode cung cấp.
 
 ### Lưu ý khi deploy
-- Các file Excel (`TEMPLATE_RUN_MEGER.xlsx`, `freshdesk_reply_list_auto.xlsx`) và template Word cần có trong repo hoặc được upload sau khi container chạy
+- Các file Excel và template Word cần có trong repo hoặc upload thủ công vào container sau khi chạy
 - Thư mục `uploads/`, `output_grouped/`, `archive_data/` được tạo tự động khi khởi động
 - Dữ liệu trong container **không persistent** — nếu container restart, file output bị xóa. Lưu log Excel về máy sau mỗi lần gửi.
 
