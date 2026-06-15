@@ -17,7 +17,7 @@ Tự động tạo chứng từ Word/PDF và reply hàng loạt lên Freshdesk c
 ### 3. Convert sang PDF trước khi gửi
 - Bước 2 có nút **Convert sang PDF** — chuyển toàn bộ `.docx` sang `.pdf` để giữ đúng font/layout
 - Chạy tự động bằng **LibreOffice** (Linux/Greennode) hoặc **Microsoft Word** (Windows)
-- Nếu convert thất bại, tool tự fallback sang gửi file `.docx` và hiện cảnh báo
+- Nếu convert thất bại, tool tự fallback sang gửi file `.docx` và hiện cảnh báo để xử lý thủ công
 
 ### 4. Chọn ticket muốn gửi
 - Tick chọn từng ticket hoặc dùng **Chọn tất cả / Bỏ chọn tất cả**
@@ -40,10 +40,10 @@ Tự động tạo chứng từ Word/PDF và reply hàng loạt lên Freshdesk c
 ## Luồng sử dụng (4 bước)
 
 ```
-Bước 1            →  Bước 2                      →  Bước 3        →  Bước 4
-Upload Excel          Kết quả Word                   Chọn & Gửi       Hoàn thành
-Upload file           Xem / tải / replace file        Chọn ticket      Xem log
-giao dịch             + Convert sang PDF (tuỳ chọn)   → Gửi reply      Tải log Excel
+Bước 1            →  Bước 2                    →  Bước 3        →  Bước 4
+Upload Excel          Kết quả Word                 Chọn & Gửi       Hoàn thành
+Upload file           Xem / tải / replace file      Chọn ticket      Xem log
+giao dịch             + Convert sang PDF             → Gửi reply      Tải log Excel
 ```
 
 ---
